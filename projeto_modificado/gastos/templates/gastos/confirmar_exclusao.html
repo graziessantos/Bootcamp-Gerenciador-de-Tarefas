@@ -1,0 +1,27 @@
+{% extends "gastos/base.html" %}
+
+{% block title %}Confirmar Exclusão — Gerenciador de Tarefas{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white fw-semibold">Confirmar Exclusão</div>
+            <div class="card-body text-center">
+                <p class="fs-5">Deseja realmente excluir a tarefa:</p>
+                <p class="fw-bold fs-4">{{ tarefa.titulo }}</p>
+                <p class="text-muted">
+                    <span class="badge prioridade-{{ tarefa.prioridade }}">{{ tarefa.get_prioridade_display }}</span>
+                    &nbsp;|&nbsp; Categoria: <strong>{{ tarefa.categoria }}</strong>
+                    {% if tarefa.data_prazo %}&nbsp;|&nbsp; Prazo: {{ tarefa.data_prazo|date:"d/m/Y" }}{% endif %}
+                </p>
+                <form method="post" class="d-flex justify-content-center gap-3 mt-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Sim, excluir</button>
+                    <a href="{% url 'gastos:index' %}" class="btn btn-outline-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
