@@ -1,6 +1,5 @@
 """Migration inicial — cria a tabela Tarefa."""
 
-import django.db.models.deletion
 from django.db import migrations, models
 
 

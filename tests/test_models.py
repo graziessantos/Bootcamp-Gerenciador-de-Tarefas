@@ -1,5 +1,6 @@
 import pytest
 from django.utils import timezone
+
 from gastos.models import Tarefa
 
 
