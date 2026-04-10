@@ -108,6 +108,6 @@ ruff check . --fix
 ---
 
 ## Autor
-
-Seu Nome Completo  
-[Link do Repositório no GitHub](https://github.com/seu-usuario/seu-repositorio)
+Grazielle Santana dos Santos
+ 
+[Link do Repositório no GitHub]
