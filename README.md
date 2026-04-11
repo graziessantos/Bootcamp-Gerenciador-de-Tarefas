@@ -45,7 +45,7 @@ Este projeto propõe uma solução simples e direta: um gerenciador de tarefas a
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/romes-dev/clone-Etapa-I.git
+git clone https://github.com/graziessantos/Bootcamp-Gerenciador-de-Tarefas.git
 cd Gerenciador-Tarefas
 
 # 2. Crie e ative um ambiente virtual
