@@ -4,7 +4,7 @@ import urllib.request
 import json
 
 
-WORLDTIME_URL = "http://worldtimeapi.org/api/timezone/America/Sao_Paulo"
+WORLDTIME_URL = "https://timeapi.io/api/time/current/zone?timeZone=America/Sao_Paulo"
 
 
 def buscar_horario_brasilia() -> dict | None:
