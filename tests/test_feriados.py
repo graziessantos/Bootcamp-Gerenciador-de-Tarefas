@@ -1,5 +1,7 @@
 """Testes de integração — BrasilAPI Feriados Nacionais."""
 
+"""Testes de integração — BrasilAPI Feriados Nacionais."""
+
 import json
 from datetime import date
 from unittest.mock import MagicMock, patch
