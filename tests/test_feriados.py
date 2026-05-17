@@ -1,7 +1,5 @@
 """Testes de integração — BrasilAPI Feriados Nacionais."""
 
-"""Testes de integração — BrasilAPI Feriados Nacionais."""
-
 import json
 from datetime import date
 from unittest.mock import MagicMock, patch
@@ -132,3 +130,4 @@ class TestVerificarFeriadosEmTarefas:
         alertas = verificar_feriados_em_tarefas(Tarefa.objects.all())
         assert t_feriado.pk in alertas
         assert t_normal.pk not in alertas
+        
