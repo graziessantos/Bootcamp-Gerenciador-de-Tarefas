@@ -1,4 +1,4 @@
-"""Testes de integração — WorldTimeAPI Horário de Brasília."""
+"""Testes de integração — TimeAPI Horário de Brasília."""
 
 import json
 from unittest.mock import MagicMock, patch
@@ -15,9 +15,9 @@ def _mock_urlopen(dados: dict):
 
 
 DADOS_MOCK = {
-    "datetime": "2026-05-17T14:35:10.123456-03:00",
-    "timezone": "America/Sao_Paulo",
-    "utc_offset": "-03:00",
+    "date": "05/17/2026",
+    "time": "14:35:10.123456",
+    "timeZone": "America/Sao_Paulo",
 }
 
 
@@ -27,7 +27,7 @@ class TestBuscarHorarioBrasilia:
         mock_urlopen.return_value = _mock_urlopen(DADOS_MOCK)
         resultado = buscar_horario_brasilia()
         assert isinstance(resultado, dict)
-        assert "datetime" in resultado
+        assert "time" in resultado
 
     @patch("urllib.request.urlopen")
     def test_retorna_none_em_caso_de_erro(self, mock_urlopen):
@@ -52,6 +52,6 @@ class TestFormatarHorario:
         resultado = formatar_horario(None)
         assert resultado == "Horário indisponível"
 
-    def test_retorna_indisponivel_se_sem_datetime(self):
-        resultado = formatar_horario({"timezone": "America/Sao_Paulo"})
+    def test_retorna_indisponivel_se_sem_campos(self):
+        resultado = formatar_horario({"timeZone": "America/Sao_Paulo"})
         assert resultado == "Horário indisponível"
