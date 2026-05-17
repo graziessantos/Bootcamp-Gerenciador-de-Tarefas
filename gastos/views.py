@@ -79,4 +79,3 @@ def excluir(request, pk):
         return redirect("gastos:index")
 
     return render(request, "gastos/confirmar_exclusao.html", {"tarefa": tarefa})
-    
