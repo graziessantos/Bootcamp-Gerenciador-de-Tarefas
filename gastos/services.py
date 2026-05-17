@@ -1,49 +1,32 @@
-"""Serviço de integração com a BrasilAPI para consulta de feriados nacionais."""
+"""Serviço de integração com a WorldTimeAPI para exibir horário de Brasília."""
 
-import json
 import urllib.request
-from datetime import date
-
-BRASILAPI_URL = "https://brasilapi.com.br/api/feriados/v1/{ano}"
+import json
 
 
-def buscar_feriados(ano: int) -> list[dict]:
-    url = BRASILAPI_URL.format(ano=ano)
+WORLDTIME_URL = "http://worldtimeapi.org/api/timezone/America/Sao_Paulo"
+
+
+def buscar_horario_brasilia() -> dict | None:
+    """
+    Busca o horário atual de Brasília via WorldTimeAPI.
+    Retorna dict com os dados ou None em caso de erro.
+    """
     try:
-        with urllib.request.urlopen(url, timeout=5) as response:
-            data = json.loads(response.read().decode("utf-8"))
-            return data if isinstance(data, list) else []
+        with urllib.request.urlopen(WORLDTIME_URL, timeout=5) as response:
+            return json.loads(response.read().decode("utf-8"))
     except Exception:
-        return []
+        return None
 
 
-def verificar_feriado(data_alvo: date) -> dict | None:
-    feriados = buscar_feriados(data_alvo.year)
-    data_str = data_alvo.strftime("%Y-%m-%d")
-    for feriado in feriados:
-        if feriado.get("date") == data_str:
-            return feriado
-    return None
-
-
-def verificar_feriados_em_tarefas(tarefas) -> dict[int, dict]:
-    anos_necessarios: set[int] = set()
-    for tarefa in tarefas:
-        if tarefa.data_prazo:
-            anos_necessarios.add(tarefa.data_prazo.year)
-
-    cache_feriados: dict[int, list[dict]] = {}
-    for ano in anos_necessarios:
-        cache_feriados[ano] = buscar_feriados(ano)
-
-    alertas: dict[int, dict] = {}
-    for tarefa in tarefas:
-        if tarefa.data_prazo:
-            feriados_do_ano = cache_feriados.get(tarefa.data_prazo.year, [])
-            data_str = tarefa.data_prazo.strftime("%Y-%m-%d")
-            for feriado in feriados_do_ano:
-                if feriado.get("date") == data_str:
-                    alertas[tarefa.pk] = feriado
-                    break
-
-    return alertas
+def formatar_horario(dados: dict | None) -> str:
+    """Formata o horário retornado pela API para exibição."""
+    if not dados:
+        return "Horário indisponível"
+    datetime_str = dados.get("datetime", "")
+    if not datetime_str:
+        return "Horário indisponível"
+    # Ex: "2026-05-17T14:35:10.123456-03:00" → "17/05/2026 às 14:35"
+    data, hora = datetime_str[:10], datetime_str[11:16]
+    ano, mes, dia = data.split("-")
+    return f"{dia}/{mes}/{ano} às {hora}"
