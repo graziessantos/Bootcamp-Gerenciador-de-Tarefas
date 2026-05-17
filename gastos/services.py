@@ -1,8 +1,7 @@
 """Serviço de integração com a TimeAPI para exibir horário de Brasília."""
 
-import urllib.request
 import json
-
+import urllib.request
 
 TIMEAPI_URL = "https://timeapi.io/api/time/current/zone?timeZone=America/Sao_Paulo"
 

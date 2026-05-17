@@ -3,8 +3,6 @@
 import json
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from gastos.services import buscar_horario_brasilia, formatar_horario
 
 
