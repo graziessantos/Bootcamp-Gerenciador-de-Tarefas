@@ -2,13 +2,12 @@
 
 import json
 from datetime import date
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
-from gastos.services import buscar_feriados, verificar_feriado, verificar_feriados_em_tarefas
 from gastos.models import Tarefa
-
+from gastos.services import buscar_feriados, verificar_feriado, verificar_feriados_em_tarefas
 
 FERIADOS_2025_MOCK = [
     {"date": "2025-01-01", "name": "Confraternização Mundial", "type": "national"},

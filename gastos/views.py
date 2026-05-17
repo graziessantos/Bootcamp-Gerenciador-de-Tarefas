@@ -3,10 +3,10 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from .services import verificar_feriados_em_tarefas
 
 from .forms import TarefaForm
 from .models import PRIORIDADES, Tarefa
+from .services import verificar_feriados_em_tarefas
 
 
 def index(request):

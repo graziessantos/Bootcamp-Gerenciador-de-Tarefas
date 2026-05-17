@@ -1,9 +1,8 @@
 """Serviço de integração com a BrasilAPI para consulta de feriados nacionais."""
 
-import urllib.request
 import json
+import urllib.request
 from datetime import date
-
 
 BRASILAPI_URL = "https://brasilapi.com.br/api/feriados/v1/{ano}"
 
