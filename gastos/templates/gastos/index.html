@@ -1,4 +1,6 @@
 {% extends "gastos/base.html" %}
+{% extends "gastos/base.html" %}
+{% load gastos_extras %}   {# ← linha nova #}
 
 {% block title %}Minhas Tarefas — Gerenciador de Tarefas{% endblock %}
 
@@ -86,9 +88,14 @@
                                 {{ tarefa.get_prioridade_display }}
                             </span>
                         </td>
-                        <td>
+                       <td>
                             {% if tarefa.data_prazo %}
                                 {{ tarefa.data_prazo|date:"d/m/Y" }}
+                                {% with feriado=alertas_feriado|get_item:tarefa.pk %}
+                                    {% if feriado %}
+                                        <br><span class="badge bg-danger mt-1">🎉 Feriado: {{ feriado.name }}</span>
+                                    {% endif %}
+                                {% endwith %}
                             {% else %}
                                 <span class="text-muted">—</span>
                             {% endif %}

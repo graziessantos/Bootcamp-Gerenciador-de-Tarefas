@@ -3,6 +3,7 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from .services import verificar_feriados_em_tarefas
 
 from .forms import TarefaForm
 from .models import PRIORIDADES, Tarefa
@@ -25,6 +26,7 @@ def index(request):
 
     total = Tarefa.objects.count()
     pendentes = Tarefa.objects.filter(concluida=False).count()
+    alertas_feriado = verificar_feriados_em_tarefas(tarefas)
 
     context = {
         "tarefas": tarefas,
@@ -34,6 +36,7 @@ def index(request):
         "prioridades": PRIORIDADES,
         "prioridade_filtro": prioridade_filtro,
         "mes_atual": timezone.now().strftime("%B de %Y"),
+        "alertas_feriado": alertas_feriado,
     }
     return render(request, "gastos/index.html", context)
 
