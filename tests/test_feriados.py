@@ -130,4 +130,3 @@ class TestVerificarFeriadosEmTarefas:
         alertas = verificar_feriados_em_tarefas(Tarefa.objects.all())
         assert t_feriado.pk in alertas
         assert t_normal.pk not in alertas
-        
